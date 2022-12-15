@@ -1,0 +1,39 @@
+<div id="content" #content>
+  <div class="front-side">
+    <div class="info-grid">
+      <div class="name">
+        <h4>البطاقة المهنية</h4>
+      </div>
+      <img  src="assets/images/avatar.jpg" alt="avatar" style="margin-top:60px; margin-left: 10px; position: absolute;" width="100px" height="100px" />
+      <div class="phoneNo">
+        <p>النسب: {{ carte.nomAR }}</p>
+      </div>
+      <div class="phoneNoo" >
+        <p>Nom: {{ carte.nomFR }}</p>
+      </div>
+      <div class="phoneNo" style="margin-top: 20px">
+        <p>الاسم: {{ carte.prenomAR }}</p>
+      </div>
+      <div class="phoneNoo" style="margin-top: 20px; "> 
+        <p>Prénom: {{ carte.prenomFR }}</p>
+      </div> 
+    </div>
+  </div>
+  <div class="back-side">
+    <div class="name-tag">
+       
+        <h3>البطاقة المهنية</h3>
+        <div class="qrCode">
+          <qr-code [value]="qrCodeValue" [size]="width"></qr-code>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-footer text-muted text-center">
+  <button class="btn btn-danger"  (click)="downloadAsPDF()">Télécharger le PDF</button>
+</div>
+<div class="card-footer text-muted text-center">
+  <button class="btn btn-primary"  (click)="listCarte()">La liste des Cartes</button>
+</div>

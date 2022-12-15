@@ -1,0 +1,41 @@
+<div class="container-xl">
+  <div class="table-responsive">
+      <div class="table-wrapper"> 
+               
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Carte List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>النسب</th>
+          <th>الإسم</th>
+          <th>Profession</th>
+          <th>CIN</th>
+          <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carte of cartes | async">
+          <td>{{ carte.nomFR }}</td>
+          <td>{{ carte.prenomFR }}</td>
+          <td>{{ carte.nomAR }}</td>
+          <td>{{ carte.prenomAR }}</td>
+          <td>{{ carte.profession }}</td>
+          <td>{{ carte.cin }}</td>
+          <td>
+            <button (click)="carteDetails(carte.idCarte)" class="btn btn-info">Afficher cette Carte</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted text-center">
+    <button class="btn btn-success" (click)="addNew()">Ajouter une nouvelle Carte</button>
+  </div>
+</div></div>
+</div></div>
