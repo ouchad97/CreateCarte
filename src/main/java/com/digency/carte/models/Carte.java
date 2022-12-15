@@ -25,10 +25,7 @@ public class Carte {
     private String profession;
     private Date datenaissance;
     private Boolean typeCarte;
-    private String imagetitre;
 
-    private String imagetype;
-
-    @Lob
-    private byte[] image;
+    private String imageFile;
 }
+

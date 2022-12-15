@@ -5,16 +5,16 @@ import com.digency.carte.dto.CarteResponse;
 import com.digency.carte.models.Carte;
 import com.digency.carte.repository.CarteRepository;
 import com.digency.carte.service.CarteService;
-import com.digency.carte.util.ImageUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
+import java.lang.reflect.Type;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class CarteServiceImpl implements CarteService {
     CarteRepository carteRepository;
 
     @Override
-    public CarteResponse createCarte(CarteRequest carteRequest, MultipartFile file) throws IOException {
+    public CarteResponse createCarte(CarteRequest carteRequest) throws IOException {
 
         Carte carteEntity = Carte.builder()
                 .idCarte(carteRequest.getIdCarte())
@@ -36,15 +36,12 @@ public class CarteServiceImpl implements CarteService {
                 .profession(carteRequest.getProfession())
                 .datenaissance(carteRequest.getDatenaissance())
                 .typeCarte(carteRequest.getTypeCarte())
-                .imagetitre(file.getOriginalFilename())
-                .imagetype(file.getContentType())
-                .image(ImageUtility.compressImage(file.getBytes()))
+                .imageFile(carteRequest.getImageFile())
                 .build();
         carteRepository.save(carteEntity);
         log.info("Carte {} is saved", carteEntity.getIdCarte());
 
-        return new CarteResponse("Image uploaded successfully: " +
-                file.getOriginalFilename());
+        return new CarteResponse("Carte est bien crée");
     }
 
     @Override
@@ -52,6 +49,18 @@ public class CarteServiceImpl implements CarteService {
         Carte carteEntity = carteRepository.findByIdCarte(idCarte);
         CarteRequest carteReq = new CarteRequest();
         BeanUtils.copyProperties(carteEntity, carteReq);
-        return carteReq;    }
+        return carteReq;
+    }
+
+    @Override
+    public List<CarteRequest> getAllCartes() {
+        List<Carte> cartes = (List<Carte>)carteRepository.findAll();
+        Type listType = new TypeToken<List<CarteRequest>>() {}.getType();
+        List<CarteRequest> cartereq = new ModelMapper().map(cartes, listType);
+        return cartereq;
+    }
+
+
+
 }
 

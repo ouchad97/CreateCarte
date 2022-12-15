@@ -21,9 +21,7 @@ public class CarteResponse {
     private String cin;
     private String profession;
     private Date datenaissance;
-    private String imagetitre;
-    private String imagetype;
-    private byte[] image;
+    private String imageFile;
 
     public CarteResponse(String s) {
     }

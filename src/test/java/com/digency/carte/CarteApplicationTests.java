@@ -23,9 +23,6 @@ class CarteApplicationTests {
 	@Test
 	public void testaddCarte() {
 
-		CarteRequest carteRequest= new CarteRequest(1L,"TestnomFR","TestnomAR","TestprenomFR","TestprenomAR","Testcin","TestProfession",new Date(2002,10,22),true);
-		carteService.createCarte(carteRequest);
-		System.out.print(carteRequest.toString());
 	}
 
 }
